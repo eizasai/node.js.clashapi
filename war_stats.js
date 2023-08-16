@@ -1,6 +1,9 @@
 const express = require("express");
-var app = express();
+const app = express();
+const port = 5000;
 var cors = require("cors");
+app.use('index.html');
+app.listen(process.env.port || port, () => console.log("listening on ${port}"));
 app.use(cors());
 const clashapi_url = "https://api.clashofclans.com/v1/";
 const api_key = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiIsImtpZCI6IjI4YTMxOGY3LTAwMDAtYTFlYi03ZmExLTJjNzQzM2M2Y2NhNSJ9.eyJpc3MiOiJzdXBlcmNlbGwiLCJhdWQiOiJzdXBlcmNlbGw6Z2FtZWFwaSIsImp0aSI6IjE0NGE5NjhkLTliYmItNDA5MC04MWJmLTg1ZTI4NDAxNGVkZiIsImlhdCI6MTY4ODI1Mjk5MCwic3ViIjoiZGV2ZWxvcGVyLzYwOWQxOTQwLTVkMjgtZDFmYy03NjZmLThmYjE0MTVjZGNiYiIsInNjb3BlcyI6WyJjbGFzaCJdLCJsaW1pdHMiOlt7InRpZXIiOiJkZXZlbG9wZXIvc2lsdmVyIiwidHlwZSI6InRocm90dGxpbmcifSx7ImNpZHJzIjpbIjEwMC40LjcwLjE3NSJdLCJ0eXBlIjoiY2xpZW50In1dfQ.NBorECkqkp1TeUJFBuheml9Mwr1fbOXe4wVfLmWkdLzJklhXeuXdmLcvK-jOsN3BuwVXyjaqzojRNwFiCM4bQg";
