@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%-player.name%> information</title>
+        <link rel="stylesheet" href="/public/css/style.css">
+    </head>
+    <body>
+        <h1>Clash of Clans War Stats</h1>
+        <div class="ClanSearch">
+            <form action="/" method="post">
+                <input typ="text" name="search1" placeholder="Search for a clan" required>
+                <input type="submit" value="Search">
+            </form>
+        </div>
+        <div class="PlayerSearch">
+            <form action="/" method="post">
+                <input typ="text" name="search2" placeholder="Search for a player" required>
+                <input type="submit" value="Search">
+            </form>
+        </div>
+        <div class="Results">
+            <% if (player.league != null) { %>
+                <img src="<%-player.league.iconUrls.small%>">
+            <% } else { %>
+                <img src="https://api-assets.clashofclans.com/leagues/72/e--YMyIexEQQhE4imLoJcwhYn6Uy8KqlgyY3_kFV6t4.png">
+            <% } %>
+            <h1><%-player.name%></h1>
+            <p>
+                <a href="clan<%-player.clan.tag.substring(1, player.clan.tag.length)%>"><%-player.clan.name%> <img src="<%-player.clan.badgeUrls.small%>"></a>
+            </p>
+        </div>
+    </body>
+</html>
