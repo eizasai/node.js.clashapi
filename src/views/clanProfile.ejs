@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Clash of Clans War Stats</title>
+        <title><%-clan.name%> information</title>
         <link rel="stylesheet" href="/public/css/style.css">
     </head>
     <body>
@@ -18,20 +18,15 @@
                 <input type="submit" value="Search">
             </form>
         </div>
+        <div class="Results">
+            <img src="<%-clan.badgeUrls.small%>">
+            <h1><%-clan.name%></h1>
+            <% if(clan.memberList != null) { %>
+                <% clan.memberList.forEach(function(member, index) { %>
+                <a href="player<%-member.tag.substring(1, clan.tag.length)%>" class="clanBox">
+                    <p><%-index%>. <img src="<%-member.league.iconUrls.tiny%>">:<%- member.name%> - <%-member.role%></p>
+                </a>
+                <% })} %>
+        </div>
     </body>
 </html>
-<!-- <!DOCTYPE html>
-<html>
-    <head> 
-        <title>Clash of Clans war stats</title>
-    </head>
-    <body>
-        <h1>Clash of Clans War Stats</h1>
-        <input id="ClanSearch" type="text"  onkeyup="search_clan()" placeholder="Search for a Clan">
-        <input id="PlayerSearch" type="text" onkeyup="search_player()" placeholder="Search for a player">
-        <p>
-            <%= clan.tag %>
-            <%= clan.name %>
-        </p>
-    </body>
-</html> -->

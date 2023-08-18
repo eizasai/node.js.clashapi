@@ -12,12 +12,33 @@ clashapiRouter.get("", async(req, res) => {
     res.render("clashapi", {clan : ""})
 })
 
-clashapiRouter.get("/clans/:id", async(req, res) => {
+clashapiRouter.get("/clan:id", async(req, res) => {
     let clanID = req.params.id;
+    console.log("displaying info for clan with tag : " + clanID);
     axios.defaults.headers.common = {"authorization": "Bearer " + api_key};
-    const clanAPI = await axios.get(clashapi_url + "clans/%" + clanID, {Headers: api_headers});
-    console.log(clanAPI.data.tag);
-    res.render("clashapi", {clan : clanAPI.data})
+    const clanAPI = await axios.get(clashapi_url + "clans/%23" + clanID, {Headers: api_headers});
+    res.render("clanProfile", {clan : clanAPI.data});
+    console.log(clanAPI.data.memberList[0]);
+})
+
+clashapiRouter.post("", async(req, res) => {
+    let clanSearch = req.body.search1;
+    let playerSearch = req.body.search2;
+    axios.defaults.headers.common = {"authorization": "Bearer " + api_key};
+    if (clanSearch != null && clanSearch.length > 2) {
+        console.log("finding clans :" + clanSearch);
+        let searchQuery = "clans?name=" + clanSearch+"&limit=50"
+        const clanResults = await axios.get(clashapi_url + searchQuery, {Headers: api_headers});
+        res.render("clanSearch", {clans : clanResults.data.items})
+    }
+    else if (playerSearch != null) {
+        console.log("finding players :" + playerSearch);
+        res.render("clashapi", {clan : ""});
+    }
+    else {
+        console.log("invalid search");
+        res.render("clashapi", {clan : ""})
+    }
 })
 
 module.exports = clashapiRouter;
